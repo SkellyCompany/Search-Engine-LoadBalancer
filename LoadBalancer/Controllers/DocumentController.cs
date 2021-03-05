@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace SearchEngine.API.Controllers
+namespace LoadBalancer.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -26,17 +26,5 @@ namespace SearchEngine.API.Controllers
             var res = JsonConvert.DeserializeObject<Document>(result);
             return Ok(res);
         }
-
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllDocumentsFromDocTable()
-        {
-            return Ok();
-        }
-    }
-
-    public class Document {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Url { get; set; }
     }
 }
