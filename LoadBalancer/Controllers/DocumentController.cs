@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace SearchEngine.API.Controllers
 {
@@ -16,12 +17,14 @@ namespace SearchEngine.API.Controllers
         [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> GetById(string id)
         {
-            HttpResponseMessage response = await client.GetAsync("document/id");
+            var response = await client.GetAsync("http://localhost:5000/document/" + id);
             if (response.IsSuccessStatusCode)
             {
-                //product = await response.Content.ReadAsAsync<Product>();
+                //var product = await response.Content.ReadAsAsync<Product>();
             }
-            return Ok();
+            var result = await response.Content.ReadAsStringAsync();
+            var res = JsonConvert.DeserializeObject<Document>(result);
+            return Ok(res);
         }
 
         [HttpGet("all")]
@@ -29,5 +32,11 @@ namespace SearchEngine.API.Controllers
         {
             return Ok();
         }
+    }
+
+    public class Document {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
     }
 }
