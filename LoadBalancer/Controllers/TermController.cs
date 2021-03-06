@@ -20,7 +20,7 @@ namespace LoadBalancer.Controllers
 			string html = $"http://localhost:5000/term/?PageNumber={request.PageNumber}&PageCount={request.PageNumber}&PageSize={request.PageNumber}&Keyword={request.PageNumber}";
 			HttpResponseMessage response = await client.GetAsync(html);
 			string result = await response.Content.ReadAsStringAsync();
-			List<Term> terms = JsonConvert.DeserializeObject<List<Term>>(result);
+			List<DocumentInTerm> terms = JsonConvert.DeserializeObject<List<DocumentInTerm>>(result);
 			return Ok(terms);
 		}
     }
