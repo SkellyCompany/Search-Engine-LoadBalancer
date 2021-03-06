@@ -1,5 +1,7 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
+using LoadBalancer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -17,14 +19,22 @@ namespace LoadBalancer.Controllers
         [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var response = await client.GetAsync("http://localhost:5000/document/" + id);
-            if (response.IsSuccessStatusCode)
-            {
-                //var product = await response.Content.ReadAsAsync<Product>();
-            }
-            var result = await response.Content.ReadAsStringAsync();
-            var res = JsonConvert.DeserializeObject<Document>(result);
-            return Ok(res);
+            string html = "http://localhost:5000/document/" + id;
+            HttpResponseMessage response = await client.GetAsync(html);
+            string result = await response.Content.ReadAsStringAsync();
+            Document document = JsonConvert.DeserializeObject<Document>(result);
+            return StatusCode((int)response.StatusCode, document); 
+        }
+
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllDocumentsFromDocTable()
+        {
+            string html = "http://localhost:5000/document/all";
+            HttpResponseMessage response = await client.GetAsync(html);
+            string result = await response.Content.ReadAsStringAsync();
+			List<Document> documents = JsonConvert.DeserializeObject<List<Document>>(result);
+            return StatusCode((int)response.StatusCode, documents);
         }
     }
 }
