@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LoadBalancer.Entities
+namespace SearchEngine.LoadBalancer.Entities
 {
     public class Term
     {

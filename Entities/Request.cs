@@ -1,4 +1,4 @@
-﻿namespace LoadBalancer.Entities
+﻿namespace SearchEngine.LoadBalancer.Entities
 {
     public class Request
     {

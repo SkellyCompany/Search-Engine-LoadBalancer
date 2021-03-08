@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LoadBalancer
+namespace SearchEngine.LoadBalancer
 {
 	public class Startup
 	{
@@ -29,7 +29,7 @@ namespace LoadBalancer
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "LoadBalancer", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "SearchEngine - LoadBalancer", Version = "v1" });
 			});
 		}
 
@@ -40,7 +40,7 @@ namespace LoadBalancer
 			{
 				app.UseDeveloperExceptionPage();
 				app.UseSwagger();
-				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoadBalancer v1"));
+				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SearchEngine - LoadBalancer v1"));
 			}
 
 			app.UseRouting();

@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LoadBalancer": {
+    "SearchEngine.LoadBalancer": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

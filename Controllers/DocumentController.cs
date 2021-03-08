@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using LoadBalancer.Entities;
+using SearchEngine.LoadBalancer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace LoadBalancer.Controllers
+namespace SearchEngine.LoadBalancer.Controllers
 {
     [Route("[controller]")]
     [ApiController]
