@@ -11,8 +11,8 @@ namespace LoadBalancer.LoadManager
 
         public LoadManager(ILoadManagerSettings loadBalancerSettings)
         {
-            string hostUrl = loadBalancerSettings.Host[0..^4];
-            int hostNumber = int.Parse(loadBalancerSettings.Host.Split(":").Last());
+            string hostUrl = loadBalancerSettings.FirstHost[0..^4];
+            int hostNumber = int.Parse(loadBalancerSettings.FirstHost.Split(":").Last()) + loadBalancerSettings.HostIncrementationValue;
             for (int i = 0; i < loadBalancerSettings.HostsPoolSize; i++)
             {
                 _hosts.Enqueue(hostUrl + hostNumber);
