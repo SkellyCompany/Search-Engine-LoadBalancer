@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using LoadBalancer.LoadManager;
+using System;
 
 namespace SearchEngine.LoadBalancer.Controllers
 {
@@ -23,6 +24,7 @@ namespace SearchEngine.LoadBalancer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDocumentsForASpecificTerm([FromQuery] Request request)
         {
+            Console.WriteLine("ass");
             string url = $"{_loadManager.GetNextHost()}" +
             $"/term/?PageNumber={request.PageNumber}&PageCount={request.PageCount}&PageSize={request.PageSize}&Keyword={request.Keyword}";
             HttpResponseMessage response = await client.GetAsync(url);

@@ -1,6 +1,6 @@
 ﻿namespace LoadBalancer.LoadManager
 {
-    public interface ILoadManagerSettings
+    public interface ILoadBalancerSettings
     {
         public string FirstHost { get; set; }
         public int HostsPoolSize { get; set; }

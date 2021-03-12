@@ -27,10 +27,23 @@ namespace SearchEngine.LoadBalancer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<LoadManagerSettings>(Configuration.GetSection(nameof(LoadManagerSettings)));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowWeb",
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    // builder.WithOrigins("http://localhost:5000");
+                    // builder.AllowAnyHeader();
+                    // builder.AllowAnyMethod();
+                    // builder.AllowCredentials();
+                });
+            });
 
-            services.AddSingleton<ILoadManagerSettings, LoadManagerSettings>(sp =>
-                sp.GetRequiredService<IOptions<LoadManagerSettings>>().Value);
+            services.Configure<LoadBalancerSettings>(Configuration.GetSection(nameof(LoadBalancerSettings)));
+
+            services.AddSingleton<ILoadBalancerSettings, LoadBalancerSettings>(sp =>
+                sp.GetRequiredService<IOptions<LoadBalancerSettings>>().Value);
             services.AddSingleton<ILoadManager, LoadManager>();
 
             services.AddControllers();
@@ -49,6 +62,8 @@ namespace SearchEngine.LoadBalancer
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SearchEngine - LoadBalancer v1"));
             }
+
+            app.UseCors("AllowWeb");
 
             app.UseRouting();
 

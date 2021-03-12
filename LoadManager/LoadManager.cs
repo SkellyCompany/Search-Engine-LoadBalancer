@@ -9,15 +9,14 @@ namespace LoadBalancer.LoadManager
         private readonly object _hostsQueueLock = new object();
 
 
-        public LoadManager(ILoadManagerSettings loadBalancerSettings)
+        public LoadManager(ILoadBalancerSettings loadManagerSettings)
         {
-            string hostUrl = loadBalancerSettings.FirstHost[0..^4];
-            int hostNumber = int.Parse(loadBalancerSettings.FirstHost.Split(":").Last()) + loadBalancerSettings.HostIncrementationValue;
-            for (int i = 0; i < loadBalancerSettings.HostsPoolSize; i++)
+            string hostUrl = loadManagerSettings.FirstHost[0..^4];
+            int hostNumber = int.Parse(loadManagerSettings.FirstHost.Split(":").Last()) + loadManagerSettings.HostIncrementationValue;
+            for (int i = 0; i < loadManagerSettings.HostsPoolSize; i++)
             {
                 _hosts.Enqueue(hostUrl + hostNumber);
-                hostNumber += loadBalancerSettings.HostIncrementationValue;
-                //_hostsQueueLock.gregsucksZ;
+                hostNumber += loadManagerSettings.HostIncrementationValue;
             }
         }
 
