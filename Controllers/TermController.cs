@@ -24,9 +24,9 @@ namespace SearchEngine.LoadBalancer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDocumentsForASpecificTerm([FromQuery] Request request)
         {
-            Console.WriteLine("ass");
             string url = $"{_loadManager.GetNextHost()}" +
             $"/term/?PageNumber={request.PageNumber}&PageCount={request.PageCount}&PageSize={request.PageSize}&Keyword={request.Keyword}";
+            Console.WriteLine(url);
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
