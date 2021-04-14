@@ -25,7 +25,7 @@ namespace SearchEngine.LoadBalancer.Controllers {
 			HttpResponseMessage response = await client.GetAsync(url);
 			if (response.IsSuccessStatusCode) {
 				string result = await response.Content.ReadAsStringAsync();
-				SearchHistory searchHistory = JsonConvert.DeserializeObject<SearchHistory>(result);
+				List<string> searchHistory = JsonConvert.DeserializeObject<List<string>>(result);
 				return Ok(searchHistory);
 			} else {
 				int statCode = (int)response.StatusCode;
