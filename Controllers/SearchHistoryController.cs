@@ -20,7 +20,7 @@ namespace SearchEngine.LoadBalancer.Controllers {
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> GetHistory([FromQuery] string keyword, [FromQuery] int maxAmount) {
+		public async Task<IActionResult> Get([FromQuery] string keyword, [FromQuery] int maxAmount) {
 			string url = $"{_loadManager.GetNextHost()}/searchHistory/?" + "keyword=" + keyword + "&maxAmount=" + maxAmount;
 			HttpResponseMessage response = await client.GetAsync(url);
 			if (response.IsSuccessStatusCode) {
