@@ -23,7 +23,7 @@ namespace SearchEngine.LoadBalancer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetHistory(string id)
+        public async Task<IActionResult> GetHistory()
         {
             string url = $"{_loadManager.GetNextHost()}/searchHistory/";
             HttpResponseMessage response = await client.GetAsync(url);
